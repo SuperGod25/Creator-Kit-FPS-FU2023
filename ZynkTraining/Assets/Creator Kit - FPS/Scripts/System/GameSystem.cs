@@ -25,8 +25,10 @@ public class GameSystem : MonoBehaviour
     public int DestroyedTarget => m_TargetDestroyed;
     public int Score => m_Score;
 
+    
     float m_Timer;
     bool m_TimerRunning = false;
+    
     
     int m_TargetCount;
     int m_TargetDestroyed;
@@ -209,4 +211,24 @@ public class GameSystem : MonoBehaviour
 
         GameSystemInfo.Instance.UpdateScore(m_Score);
     }
+
+    float m_SlowMotionScale = 0.2f;
+
+    public IEnumerator SlowMotionEffect()
+    {
+        Time.timeScale = m_SlowMotionScale;
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+    }
+
+    public void EnableSlowMotionEffect()
+    {
+        m_SlowMotionScale = 0.2f;
+    }
+
+    public void DisableSlowMotionEffect()
+    {
+        m_SlowMotionScale = 1f;
+    }
+
 }

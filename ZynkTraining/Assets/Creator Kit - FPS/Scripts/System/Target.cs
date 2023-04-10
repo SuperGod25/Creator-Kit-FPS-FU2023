@@ -69,5 +69,6 @@ public class Target : MonoBehaviour
         gameObject.SetActive(false);
        
         GameSystem.Instance.TargetDestroyed(pointValue);
+        GameSystem.Instance.StartCoroutine(GameSystem.Instance.SlowMotionEffect());
     }
 }
