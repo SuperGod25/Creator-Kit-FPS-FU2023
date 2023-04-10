@@ -3,23 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
+
 public class HealthController : MonoBehaviour
 {
     public Slider healthSlider;
-    public float maxHealth = 100f;
+    public float maxHealth = 20f;
     private float currentHealth;
     int healthValue;
+
+
     public InputField inputField;
     public InputField inputIncDec;
     public Button buttonPlus;
     public Button buttonMinus;
 
+
+    public PostProcessVolume postProcessVolume;
+    private Vignette vignette;
+
     void Start()
     {
+        
+
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
         currentHealth = maxHealth;
         UpdateHealthUI();
+        postProcessVolume.profile.TryGetSettings(out vignette);//getting the vignette effect from post-processing volume
     }
 
     void Update()
@@ -32,8 +43,10 @@ public class HealthController : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);//loading the Game Over Scene
         }
+
+
     }
 
     public void SetHealth()
@@ -46,6 +59,7 @@ public class HealthController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        StartCoroutine(DamageVignetteEffect());//trigger the damage efect
         UpdateHealthUI();
     }
 
@@ -69,5 +83,17 @@ public class HealthController : MonoBehaviour
     {
         healthSlider.value = currentHealth;
 
+    }
+
+    private IEnumerator DamageVignetteEffect()
+    {
+        
+        vignette.intensity.Override(1f);//setting the vignette intensity to maximum value
+
+        
+        yield return new WaitForSeconds(0.1f);//wait for a short time
+
+       
+        vignette.intensity.Override(0f);///setting the vignette intensity to minimum value
     }
 }

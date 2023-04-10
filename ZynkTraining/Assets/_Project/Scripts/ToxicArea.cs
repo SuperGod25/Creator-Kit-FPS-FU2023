@@ -11,8 +11,8 @@ public class ToxicArea : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            inToxicArea = true;
-            StartCoroutine(ApplyToxicDamage(other.gameObject.GetComponent<HealthController>()));
+            inToxicArea = true;//player in toxic area
+            StartCoroutine(ApplyToxicDamage(other.gameObject.GetComponent<HealthController>()));//starting the coroutine 
         }
     }
 
@@ -20,7 +20,7 @@ public class ToxicArea : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            inToxicArea = false;
+            inToxicArea = false;//player out of the toxic area
         }
     }
 
@@ -28,7 +28,7 @@ public class ToxicArea : MonoBehaviour
     {
         while (inToxicArea)
         {
-            healthController.TakeDamage(damagePerSecond * Time.deltaTime);
+            healthController.TakeDamage(damagePerSecond * Time.deltaTime);//player is taking damage while staying in toxic area
             yield return null;
         }
     }

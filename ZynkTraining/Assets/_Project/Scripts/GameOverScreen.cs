@@ -9,12 +9,12 @@ public class GameOverScreen : MonoBehaviour
 
     private void Start()
     {
-        Controller.Instance.DisplayCursor(true);
+        Controller.Instance.DisplayCursor(true);//activate the cursor
     }
 
     public void Retry()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);//load the main scene
     }
 
     public void ExitGame()
@@ -22,7 +22,7 @@ public class GameOverScreen : MonoBehaviour
 #if UNITY_EDITOR
     UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+        Application.Quit();//quit application
 #endif
     }
 

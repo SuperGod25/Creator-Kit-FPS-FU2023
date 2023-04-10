@@ -212,23 +212,23 @@ public class GameSystem : MonoBehaviour
         GameSystemInfo.Instance.UpdateScore(m_Score);
     }
 
-    float m_SlowMotionScale = 0.2f;
+    float m_SlowMotionScale = 0.2f;//time variable for the slow-mo effect
 
     public IEnumerator SlowMotionEffect()
     {
-        Time.timeScale = m_SlowMotionScale;
-        yield return new WaitForSecondsRealtime(2);
-        Time.timeScale = 1;
+        Time.timeScale = m_SlowMotionScale;//setting the slow-mo after kill
+        yield return new WaitForSecondsRealtime(2);//wait 2 seconds 
+        Time.timeScale = 1;//time becomes normal
     }
 
     public void EnableSlowMotionEffect()
     {
-        m_SlowMotionScale = 0.2f;
+        m_SlowMotionScale = 0.2f;//slo-mo effect
     }
 
     public void DisableSlowMotionEffect()
     {
-        m_SlowMotionScale = 1f;
+        m_SlowMotionScale = 1f;//time becomes normal
     }
 
 }

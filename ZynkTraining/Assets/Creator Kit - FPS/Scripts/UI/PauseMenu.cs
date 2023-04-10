@@ -14,15 +14,15 @@ public class PauseMenu : MonoBehaviour
     void Awake()
     { 
         Instance = this;
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);//activate pause menu
         
     }
 
     public void Display()
     {
-        gameObject.SetActive(true);
-        GameSystem.Instance.StopTimer();
-        Controller.Instance.DisplayCursor(true);
+        gameObject.SetActive(true);//displays de menu
+        GameSystem.Instance.StopTimer();//stops the time
+        Controller.Instance.DisplayCursor(true);//displays the cursor
     }
 
     public void OpenEpisode()
@@ -37,20 +37,20 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToGame()
     {
-        UIAudioPlayer.PlayPositive();
-        GameSystem.Instance.StartTimer();
-        gameObject.SetActive(false);
-        Controller.Instance.DisplayCursor(false);
+        UIAudioPlayer.PlayPositive();//sound for buttons 
+        GameSystem.Instance.StartTimer();//start the timer
+        gameObject.SetActive(false);//deactivate pause menu
+        Controller.Instance.DisplayCursor(false);//hides the cursor
     }
 
     public void Settings()
     {
         
         GameSystem.Instance.StopTimer();
-        // dezactivează PauseMenu
+        // deactivate PauseMenu
         gameObject.SetActive(false);
 
-        // activează SettingsMenu
+        // activate SettingsMenu
         settingsMenu.SetActive(true);
         
         
@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+        Application.Quit();//quit application
 #endif
     }
 }

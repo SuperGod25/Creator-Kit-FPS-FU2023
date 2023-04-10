@@ -19,21 +19,21 @@ public class SettingsMenu : MonoBehaviour
     {
         if (isOn)
         {
-            GameSystem.Instance.EnableSlowMotionEffect();
+            GameSystem.Instance.EnableSlowMotionEffect();//enable slow-mo
         }
         else
         {
-            GameSystem.Instance.DisableSlowMotionEffect();
+            GameSystem.Instance.DisableSlowMotionEffect();//disable slo-mo
         }
     }
 
     public void Back()
     {
         UIAudioPlayer.PlayPositive();
-        // dezactivează SettingsMenu
+        // deactivate SettingsMenu
         gameObject.SetActive(false);
 
-        // activează PauseMenu
+        // activate PauseMenu
         pauseMenu.SetActive(true);
     }
 }

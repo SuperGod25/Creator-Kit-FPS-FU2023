@@ -69,6 +69,6 @@ public class Target : MonoBehaviour
         gameObject.SetActive(false);
        
         GameSystem.Instance.TargetDestroyed(pointValue);
-        GameSystem.Instance.StartCoroutine(GameSystem.Instance.SlowMotionEffect());
+        GameSystem.Instance.StartCoroutine(GameSystem.Instance.SlowMotionEffect());//Instantiate the coroutine when a target is killed
     }
 }
