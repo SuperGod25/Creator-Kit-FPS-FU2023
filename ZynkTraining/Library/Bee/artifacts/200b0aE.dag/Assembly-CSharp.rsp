@@ -405,6 +405,7 @@
 "Assets/_Project/Scripts/HealthController.cs"
 "Assets/_Project/Scripts/SettingsMenu.cs"
 "Assets/_Project/Scripts/SoundSettings.cs"
+"Assets/_Project/Scripts/ToxicArea.cs"
 -langversion:9.0
 
 /deterministic

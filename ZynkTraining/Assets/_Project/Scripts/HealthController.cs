@@ -5,76 +5,69 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class HealthController : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public Slider healthSlider;
+    public float maxHealth = 100f;
+    private float currentHealth;
+    int healthValue;
+    public InputField inputField;
+    public InputField inputIncDec;
+    public Button buttonPlus;
+    public Button buttonMinus;
 
-    public HealthBar healthBar;
-    public InputField setHealthInput;
-
-    public Button increaseButton;
-    public Button decreaseButton;
-    public InputField increaseDecreaseInput;
-
-
-
-    int setHealthInputNum;
-    int increaseDecreaseInputNum;
-    // Start is called before the first frame update
     void Start()
     {
-        
-        
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        UpdateHealthUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(20);
+            TakeDamage(2);
+            UpdateHealthUI();
         }
 
-
-    }
-
-    void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-
-        healthBar.SetHealth(currentHealth);
-
-        if(currentHealth==0)
+        if(currentHealth <= 0)
         {
-            SceneManager.LoadScene("Game Over");
+            SceneManager.LoadScene(1);
         }
     }
 
-    public void SetHealthByInput()
+    public void SetHealth()
     {
-        setHealthInputNum = System.Convert.ToInt32(setHealthInput.text);
+        healthValue = int.Parse(inputField.text);
+        currentHealth = healthValue;
+        UpdateHealthUI();
+    }
 
-        currentHealth = setHealthInputNum;
-        if (setHealthInputNum>=100)
-        {
-            setHealthInput.text = "MAX HEALTH";
-            currentHealth = maxHealth;
-        }
-        healthBar.SetHealth(currentHealth);
-        ///Fix health update
-      
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        UpdateHealthUI();
     }
 
     public void IncreaseHealth()
     {
-        increaseDecreaseInputNum = System.Convert.ToInt32(increaseDecreaseInput.text);
-        currentHealth += increaseDecreaseInputNum;//fix health bar
+        healthValue = int.Parse(inputIncDec.text);
+        currentHealth += healthValue;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        UpdateHealthUI();
     }
 
     public void DecreaseHealth()
     {
-        increaseDecreaseInputNum = System.Convert.ToInt32(increaseDecreaseInput.text);
-        currentHealth -= increaseDecreaseInputNum;/// fix health bar
+        healthValue = int.Parse(inputIncDec.text);
+        currentHealth -= healthValue;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        UpdateHealthUI();
+    }
+
+    void UpdateHealthUI()
+    {
+        healthSlider.value = currentHealth;
+
     }
 }
