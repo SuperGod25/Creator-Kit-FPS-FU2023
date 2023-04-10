@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Creator Kit - FPS/Scenes/ExampleScene.unity
+- path: Assets/_Project/Scenes/Game Over.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
